@@ -1,1 +1,1 @@
-
+I'm experienced with Java, C/C++, Python, and moderately experienced with JavaScript, PostgreSQL, and HTML. I worked on a NodeJS project over the summer in my internship and dabbled a little with React, but only on a surface level. I am also experienced with AWS (Lambda, S3, API Gateway, SES, CloudFormation, CloudWatch) and moderately experienced implementing REST APIs through JS.
