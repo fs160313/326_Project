@@ -13,7 +13,10 @@ Loan Calculator for WebDev IE Project
 ## What we are building:
 This project is a loan repayment calculator that will provide students with an interactive interface to help better plan their loan repayment over time.
 
-The topic requirements we are going to include are:
-* Data Storage
-* Authentication
-* HTTP Application Server
+We are going to incorporate the following topics:
+* Authentication:
+    Users will have the option to make accounts to save their information. We will use authentication to make the accounts secure.
+* Data Storage:
+    We will store users' information in a database so it is available when they sign out and sign back in.
+* HTTP Application Server:
+    We will implement an HTTP server to communicate between the database and the client side application.
