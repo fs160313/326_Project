@@ -7,4 +7,4 @@ Loan Calculator for WebDev IE Project
 
 [Nikita Kudryavtsev](https://github.com/fs160313/326_Project/blob/master/team/NikitaKudryavtsev.md)
 
-[Nikita Kudryavtsev](https://github.com/fs160313/326_Project/blob/master/team/LizaBialik.md)
+[Liza Bialik](https://github.com/fs160313/326_Project/blob/master/team/LizaBialik.md)
