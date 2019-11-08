@@ -1,13 +1,13 @@
 # 326_Project
 Loan Calculator for WebDev IE Project
 
-[Inderjeet Badwal](https://github.com/fs160313/326_Project/blob/master/team/InderjeetBadwal.md)
+[Inderjeet Badwal](https://github.com/fs160313/326_Project/blob/master/team/INDERJEET_BADWAL.md)
 
-[Sam Fuschetti](https://github.com/fs160313/326_Project/blob/master/team/SamFuschetti.md)
+[Sam Fuschetti](https://github.com/fs160313/326_Project/blob/master/team/SAM_FUSCHETTI.md)
 
-[Nikita Kudryavtsev](https://github.com/fs160313/326_Project/blob/master/team/NikitaKudryavtsev.md)
+[Nikita Kudryavtsev](https://github.com/fs160313/326_Project/blob/master/team/NIKITA_KUDRYAVTSEV.md)
 
-[Liza Bialik](https://github.com/fs160313/326_Project/blob/master/team/LizaBialik.md)
+[Liza Bialik](https://github.com/fs160313/326_Project/blob/master/team/LIZA_BIALIK.md)
 
 
 ## What we are building:
