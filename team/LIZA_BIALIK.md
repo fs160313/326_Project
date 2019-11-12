@@ -1,0 +1,1 @@
+I am proficient in Python, and have some experience with Java and C. I've worked a little bit with React, Ruby on Rails, and a tiny bit with JQuery.
