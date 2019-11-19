@@ -1,0 +1,11 @@
+#form-container {
+    padding: 10px 7px;
+}
+
+#form-container input {
+    margin-left: 7px;
+}
+
+body {
+    background-color: lightblue;
+}
