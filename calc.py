@@ -36,16 +36,13 @@ class Payment_Plan():
     def calc_months_consolidated(self):
         num_months = 0
         total = self.principal
+        total_paid = 0
         while total > 0:            # until fully paid off
             total = total*(1+self.avg_interest/(100*365))**(365/12)
             num_months += 1
             total-=self.monthly_payment
-        # while total > 0:            # until fully paid off
-        #     for i in range(31):     # daily interest
-        #         added = total * (self.avg_interest)/(100*365)
-        #         total += added
-        #     num_months += 1
-        #     total -= self.monthly_payment
+            total_paid += self.monthly_payment if total > 0 else self.monthly_payment + total
+        self.consolidated_total_paid = total_paid
         self.consolidated_months = num_months
     def calc_months_highest_first(self):
         num_months = 0
