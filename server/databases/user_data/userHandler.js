@@ -1,4 +1,4 @@
-var User = require('./userModel.js')
+var User = require('./userModel.js');
 
 module.exports = {
 	testingPrintUser: function(username){
@@ -7,7 +7,9 @@ module.exports = {
 			console.log(user);
 			if (user != null){
 				console.log(user.username);
-				console.log(user.password);
+        console.log(user.password);
+        console.log(user.email);
+        console.log(user.monthly_payment);
 			}
 			else{
 				console.log("User not found.");
@@ -15,25 +17,16 @@ module.exports = {
 		});
 	},
 
-	createUser: function(username, password, email){
+	createUser: function(user_json){
+    console.log(user_json)
 		console.log('made it here2');
-		console.log(username);
 		var user = new User({
-			username: username,
-			password: password,
-			email: email
+			...user_json
 		});
-		console.log(user);
+    // console.log(user);
 
-		user.save(function(err, user) {
-			if (err){
-				console.log("ERROR");
-				console.log(err);
-			}
-      else{
-				console.log("User with id: " + user._id + " saved.");  
-			}
-   	});
+    // Returning a promise here
+    return user.save()
 		
 		 
 		// User.findOne({username: username}, function(err, user){
