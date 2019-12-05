@@ -30,20 +30,20 @@ var userHandler = require('./server/databases/user_data/userHandler.js');
 
 // userHandler.temp("temp1");
 
-let temp_json_user = {
-  "username": "new_user1",
-  "password": "new_pass1",
-  "email": "new_email@new_email.com",
-  "monthly_payment": 500,
-  "projected_salary": 2000,
-  "total_debt": 1000000
-}
+// let temp_json_user = {
+//   "username": "new_user1",
+//   "password": "new_pass1",
+//   "email": "new_email@new_email.com",
+//   "monthly_payment": 500,
+//   "projected_salary": 2000,
+//   "total_debt": 1000000
+// }
 
-errProm = userHandler.createUser(temp_json_user);
-errProm.then(() => {
-  console.log("Success.");
-})
-.catch(err =>{
-  console.log(err);
-})
+// errProm = userHandler.createUser(temp_json_user);
+// errProm.then(() => {
+//   console.log("Success.");
+// })
+// .catch(err =>{
+//   console.log(err);
+// })
 // userHandler.testingPrintUser("new_user1");

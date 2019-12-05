@@ -11,13 +11,15 @@ module.exports = function(app){
   */
 
   //routes for loan endpoints
-  app.post('/loan', loanHandler.addLoans)
-  app.put('/loan/mod', loanHandler.modifyLoan)
-  app.delete('/loan', loanHandler.deleteLoan) 
+  // app.post('/loan', loanHandler.addLoans)
+  // app.put('/loan', loanHandler.modifyLoan)
+  // app.delete('/loan', loanHandler.deleteLoan) 
 
   //routes for user endpoints
-  app.post('/user', userHandler.createUser)
-  app.put('/user/mod', userHandler.modifyUser)
-  app.delete('/user', userHandler.deleteUser)
+  app.post('/user', userHandler.createUser) //done
+  app.put('/user', userHandler.modifyUser) //done
+  app.delete('/user', userHandler.deleteUser) //done
+
+  app.get('/user', userHandler.verify) //done
 
 };

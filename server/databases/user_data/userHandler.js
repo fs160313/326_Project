@@ -1,51 +1,60 @@
 var User = require('./userModel.js');
+const url = require('url');
+const querystring = require('querystring');
 
 module.exports = {
-	testingPrintUser: function(username){
-		console.log(username);
-		User.findOne({username: username}, function(err, user){
-			console.log(user);
-			if (user != null){
-				console.log(user.username);
-        console.log(user.password);
-        console.log(user.email);
-        console.log(user.monthly_payment);
-			}
-			else{
-				console.log("User not found.");
-			}
-		});
-	},
 
-	createUser: function(user_json){
-    console.log(user_json)
-		console.log('made it here2');
-		var user = new User({
-			...user_json
+	createUser: function(req, res){
+    // console.log(req.body)
+		// console.log('made it here2');
+		let user = new User({
+			...req.body
 		});
     // console.log(user);
 
     // Returning a promise here
-    return user.save()
-		
-		 
-		// User.findOne({username: username}, function(err, user){
-		// 	console.log(user);
-		// 	// if (user != null && user.password == pass){
-		// 	// 	console.log("matched password.");
-		// 	// 	res.json({'status': 'success', 'redirect':'/shoppinglist.html'});
-		// 	// }
-		// 	// else{
-		// 	// 	res.json({'status': 'failure'});
-		// 	// }
-		// 	if (user != null){
-		// 		console.log(user.username);
-		// 		console.log(user.password);
-		// 	}
-		// 	else{
-		// 		console.log("User not found.");
-		// 	}
-			
-		// });
-	}
+    user.save(function(err, user){
+      if (err){
+        res.json({'status': 'failure', 'message': err})
+      }
+      else{
+        res.json({'status': 'success', 'message': 'User with id: ' + user._id + ' saved.'});
+      }
+    });
+  },
+  
+  modifyUser: function(req, res){
+    console.log(req.body.updates);
+    User.updateOne({'_id': req.body._id}, ...req.body.updates, function(err, user){
+      if (err){
+        res.json({'status': 'failure', 'message': err});
+      }
+      else{
+        res.json({'status': 'success'});
+      }
+    });
+  },
+
+  deleteUser: function(req, res){
+    User.deleteOne({'_id': req.body._id}, function(err, user){
+      if (err){
+        res.json({'status': 'failure', 'message': err});
+      }
+      else{
+        res.json({'status': 'success'});
+      }
+    });
+  },
+
+  verify: function(req, res){
+    console.log(req.query.username);
+		User.findOne({username: req.query.username}, function(err, user){
+			if (user != null){
+        res.json({'status': 'success', 'message': 'User found.', 'password': user.password})
+			}
+			else{
+				res.json({'status': 'failure', 'message': 'User not found.'})
+			}
+		});
+	},
 };
