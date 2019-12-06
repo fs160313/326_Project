@@ -76,6 +76,7 @@ class Payment_Plan():
         self.loans = []
     def read_json(self, data):
         json_object = json.loads(data)
+        self.og_monthly_payment = float(json_object["monthly_payment"])
         self.monthly_payment = float(json_object["monthly_payment"])
         self.parse_date(json_object["grad_date"])
         loan_number = 0
@@ -99,31 +100,56 @@ class Payment_Plan():
         self.consolidated_months, self.consolidated_total_paid, self.consolidated_total_interest = Calc.calc_months_consolidated()
         self.highest_first_months, self.highest_first_total, self.highest_first_total_interest = Calc.calc_months_highest_first()
         self.weighted_months, self.weighted_total, self.weighted_total_interest = Calc.calc_months_weighted()
+    def calc_line_chart_data(self):
+        consolidated_line_values = []
     def make_graphs(self):
-        #             {
-        #                 type: 'pie',
-        #                 data: {
-        #                 labels: ["Principal", "Interest"],
-        #                 datasets: [{
-        #                 data: [self.principal, self.consolidated_total_interest],
-        #                 backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
-        #                 hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
-        #                 }]
-        #                 },
-        #                 options: {
-        #                 responsive: true
-        #                 }
-        #             }
-        self.pie_chart_consolidated = []
-        self.pie_chart_highest_first = []
-        self.pie_chart_weighted = []
-        # total_over_monthly_consolidated = []
-        # total_over_monthly_highest_first = []
-        # total_over_monthly_weighted = []
+        self.calc_line_chart_data()
+        self.pie_charts = {
+            "consolidated": {
+                        type: 'pie',
+                        data: {
+                        labels: ["Principal", "Interest"],
+                        datasets: [{
+                        data: [self.principal, self.consolidated_total_interest],
+                        backgroundColor: ["#F7464A", "#46BFBD"],
+                        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1"]
+                        }]
+                        },
+                        options: {
+                        responsive: true
+                        }
+            },
+            "highest_first": {
+                        type: 'pie',
+                        data: {
+                        labels: ["Principal", "Interest"],
+                        datasets: [{
+                        data: [self.principal, self.highest_first_total_interest],
+                        backgroundColor: ["#F7464A", "#46BFBD"],
+                        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1"]
+                        }]
+                        },
+                        options: {
+                        responsive: true
+                        }
+            },
+            "weighted": {
+                        type: 'pie',
+                        data: {
+                        labels: ["Principal", "Interest"],
+                        datasets: [{
+                        data: [self.principal, self.weighted_interest],
+                        backgroundColor: ["#F7464A", "#46BFBD"],
+                        hoverBackgroundColor: ["#FF5A5E", "#5AD3D1"]
+                        }]
+                        },
+                        options: {
+                        responsive: true
+                        }
+            }
+        }
     def make_json(self):
-        self.make_graphs()
         data = {}
-        data["graphs"] = {}
         data["principal"] = self.principal
         data["weighted_avg_interest"] = self.weight_avg_interest
         data["consolidated_months"] = self.consolidated_months
@@ -135,18 +161,17 @@ class Payment_Plan():
         data["weighted_months"] = self.weighted_months
         data["weighted_total_paid"] = self.weighted_total
         data["weighted_total_interest"] = self.weighted_total_interest
-        data["graphs"]["pie_chart_consolidated"] = self.pie_chart_consolidated
-        data["graphs"]["pie_chart_highest_first"] = self.pie_chart_highest_first
-        data["graphs"]["pie_chart_weighted"] = self.pie_chart_weighted
+        # data["graphs"] = self.pie_charts()
         return json.dumps(data)
 
 PP = Payment_Plan()
 PP.read_json(sys.argv[1])
 PP.consolidate()
 PP.calculate()
-print('principal = {}, monthly payment = {}'.format(PP.principal, PP.monthly_payment))
-print('consolidated total = {}, consolidated months = {}'.format(PP.consolidated_total_paid, PP.consolidated_months))
-print('highest first total = {}, highest first months = {}'.format(PP.highest_first_total, PP.highest_first_months))
-print('weighted total = {}, weighted months = {}'.format(PP.weighted_total, PP.weighted_months))
+# print('principal = {}, monthly payment = {}'.format(PP.principal, PP.monthly_payment))
+# print('consolidated total = {}, consolidated months = {}'.format(PP.consolidated_total_paid, PP.consolidated_months))
+# print('highest first total = {}, highest first months = {}'.format(PP.highest_first_total, PP.highest_first_months))
+# print('weighted total = {}, weighted months = {}'.format(PP.weighted_total, PP.weighted_months))
+# PP.make_graphs()
 PP.make_json()
 # '{"monthly_payment": 200, "grad_date": "5 2020", "loans": [{"amount": 5000, "interest": 5, "subsidized": true}, {"amount": 6000, "interest": 4.5, "subsidized": false}]}'
