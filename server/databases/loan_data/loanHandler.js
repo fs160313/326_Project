@@ -14,25 +14,6 @@ module.exports = {
 		});
 	},
 
-	findLoans: function(username, password, email){
-		var user = new User({
-			username: username,
-			password: password,
-			email: email
-		});
-		console.log(user);
-
-		user.save(function(err, user) {
-			if (err){
-				console.log("ERROR");
-				console.log(err);
-			}
-      else{
-				console.log("User with id: " + user._id + " saved.");  
-			}
-   	});
-  },
-
   /*
   Parameters: JSON object formatted as such:
   {
@@ -51,25 +32,58 @@ module.exports = {
     ]
   }
 
-  Returns: An array of loans (WIP - console only while API is being set up)
+  Returns: An array of loans
   */
-  addLoans: function(username, password, email){
-		var user = new User({
-			username: username,
-			password: password,
-			email: email
-		});
-		console.log(user);
+  addLoans: function(req, res){
+    let loans_arr = req.body.loans;
+    loans_arr.forEach(loan_i => {
+      let loan = new Loan({
+        user_id: req.body.user_id,
+        ...loan_i
+      });
+      loan.save(function(err, loan){
+        if (err){
+          res.json({'status': 'failure', 'message': err})
+        }
+        else{
+          res.json({'status': 'success', 'message': 'Loan with id: ' + loan._id + ' saved.'});
+        }
+      });
+    });
+  },
 
-		user.save(function(err, user) {
-			if (err){
-				console.log("ERROR");
-				console.log(err);
+  findLoans: function(req, res){
+		Loan.find({user_id: req.query.user_id}, function(err, loans){
+			if (loans != null){
+        res.json({'status': 'success', 'message': 'Loans found.', 'loans': loans});
 			}
+			else{
+				res.json({'status': 'failure', 'message': 'Loans not found.'});
+			}
+		});
+  },
+
+  modifyLoan: function(req, res){
+    console.log(req.body.updates);
+    Loan.updateOne({'_id': req.body.loan_id}, ...req.body.updates, function(err, loan){
+      if (err){
+        res.json({'status': 'failure', 'message': err});
+      }
       else{
-				console.log("User with id: " + user._id + " saved.");  
-			}
-   	});
+        res.json({'status': 'success'});
+      }
+    });
+  },
+
+  deleteLoan: function(req, res){
+    Loan.deleteOne({'_id': req.body.loan_id}, function(err, loan){
+      if (err){
+        res.json({'status': 'failure', 'message': err});
+      }
+      else{
+        res.json({'status': 'success'});
+      }
+    });
   }
   
 

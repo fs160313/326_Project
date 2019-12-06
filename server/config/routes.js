@@ -11,9 +11,10 @@ module.exports = function(app){
   */
 
   //routes for loan endpoints
-  // app.post('/loan', loanHandler.addLoans)
-  // app.put('/loan', loanHandler.modifyLoan)
-  // app.delete('/loan', loanHandler.deleteLoan) 
+  app.post('/loan', loanHandler.addLoans)
+  app.get('/loan', loanHandler.findLoans);
+  app.put('/loan', loanHandler.modifyLoan)
+  app.delete('/loan', loanHandler.deleteLoan) 
 
   //routes for user endpoints
   app.post('/user', userHandler.createUser) //done
@@ -21,5 +22,10 @@ module.exports = function(app){
   app.delete('/user', userHandler.deleteUser) //done
 
   app.get('/user', userHandler.verify) //done
+
+  let path = require('path');
+  app.get('/create_account', (req, res) => {
+    res.sendFile(path.join(__dirname + '../../../create_account.html'));
+  });
 
 };
