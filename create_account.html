@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/create_account.css">
+    <title>Sign Up</title>
+  </head>
+  <body>
+      <div class="container py-4">
+        <div class="card bg-light mx-auto" style="max-width: 600px;">
+            <article class="card-body mx-auto">
+                <h4 class="card-title text-center">Create an Account</h4>
+                <p class="text-center">Signing up is easy and allows you to save your plan for later!</p>
+                <form method="post" action="index.html" target="_blank" class="needs-validation" novalidate>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><img src="img/email.jpg" alt="email icon" width="24" height="24"></span>
+                        </div>
+                        <input name="email" class="form-control mx-auto" placeholder="Email Address" id="email"type="email" required>
+                        <div class='valid-feedback mx-5'>Ok</div>
+                        <div class='invalid-feedback mx-5'>Must match 'example@example.com'</div>
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><img src="img/user.png" alt="user icon" width="24" height="24"></span>
+                        </div>
+                        <input name="username" class="form-control mx-auto" placeholder="Username" id ="user" type="text" minlength=3 maxlength=15 pattern="^[a-zA-Z0-9_]*$" required>
+                        <div class='valid-feedback mx-5'>Ok</div>
+                        <div class='invalid-feedback mx-5'>Username must contain only alphanumerics and underscores and be between 3-15 characters</div>
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><img src="img/pass.png" alt="password icon" width="24" height="24"></span>
+                        </div>
+                        <input name="password" class="form-control mx-auto passwd" placeholder="Password" id="pass" type="password" minlength=8 maxlength=20 pattern=	
+                        "^(?=(.*[a-zA-Z].*){2,})(?=.*\d.*)(?=.*\W.*)[a-zA-Z0-9\S]{8,20}$" required>
+                        <div class='valid-feedback mx-5'>Ok</div>
+                        <div class='invalid-feedback mx-5'>Password must contain an uppercase, lowercase, number, and special character and be between 8-20 characters</div>
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><img src="img/pass.png" alt="password icon" width="24" height="24"></span>
+                        </div>
+                        <input name="" class="form-control mx-auto passwd" placeholder="Confirm password" id = "repass" type="password" minlength=8 maxlength=20 pattern=	
+                        "^(?=(.*[a-zA-Z].*){2,})(?=.*\d.*)(?=.*\W.*)[a-zA-Z0-9\S]{8,20}$" required>
+                        <div class='valid-feedback mx-5' id="confval">Ok</div>
+                        <div class='invalid-feedback mx-5' id="confinval">Passwords don't match</div>
+                    </div>
+                    <div class="form-group input-group justify-content-center">
+                        <button type="submit" class="btn btn-primary mx-3">Create</button>
+                        <button type="" class="btn btn-secondary mx-3">Go Back</button>
+                    </div> 
+                </form>
+            </article>
+        </div>
+      </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/create_account.js"></script>
+  </body>
+</html>

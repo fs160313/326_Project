@@ -1,0 +1,26 @@
+{
+  "name": "loan-calculator",
+  "version": "1.0.0",
+  "description": "Loan Calculator for WebDev IE Project",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jquery": "^3.4.1",
+    "mongoose": "^5.7.7",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fs160313/326_Project.git"
+  },
+  "author": "Inderjeet Badwal, Samuel Fuschetti, Liza Bialik, Nikita Kudraytsev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fs160313/326_Project/issues"
+  },
+  "homepage": "https://github.com/fs160313/326_Project#readme"
+}
