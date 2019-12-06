@@ -21,6 +21,7 @@ mongoose.connection.on('error', err => {
 
 // Start the server on this port
 let port = 7311;
+app.set('view engine', 'html');
 app.listen(port);
 
 
