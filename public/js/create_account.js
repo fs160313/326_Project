@@ -37,7 +37,11 @@
             }
           })
           .done(data => {
-            console.log(data);
+            if(data.status == "failure"){
+              event.preventDefault();
+              event.stopPropagation();
+              window.alert("Username already taken, please try another one.")
+            }
           });
     }
     form.classList.add('was-validated');

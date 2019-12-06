@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // Set up static files directory
-app.use(express.static('img'));
+app.use(express.static('public'));
 
 // Set up routes
 routes(app);
