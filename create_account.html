@@ -22,7 +22,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><img src="img/email.jpg" alt="email icon" width="24" height="24"></span>
                         </div>
-                        <input name="" class="form-control mx-auto" placeholder="Email Address" type="email" required>
+                        <input name="email" class="form-control mx-auto" placeholder="Email Address" id="email"type="email" required>
                         <div class='valid-feedback mx-5'>Ok</div>
                         <div class='invalid-feedback mx-5'>Must match 'example@example.com'</div>
                     </div>
@@ -30,7 +30,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><img src="img/user.png" alt="user icon" width="24" height="24"></span>
                         </div>
-                        <input name="" class="form-control mx-auto" placeholder="Username" type="text" minlength=3 maxlength=15 pattern="^[a-zA-Z0-9_]*$" required>
+                        <input name="username" class="form-control mx-auto" placeholder="Username" id ="user" type="text" minlength=3 maxlength=15 pattern="^[a-zA-Z0-9_]*$" required>
                         <div class='valid-feedback mx-5'>Ok</div>
                         <div class='invalid-feedback mx-5'>Username must contain only alphanumerics and underscores and be between 3-15 characters</div>
                     </div>
@@ -38,7 +38,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><img src="img/pass.png" alt="password icon" width="24" height="24"></span>
                         </div>
-                        <input name="" class="form-control mx-auto passwd" placeholder="Password" id= "pass" type="password" minlength=8 maxlength=20 pattern=	
+                        <input name="password" class="form-control mx-auto passwd" placeholder="Password" id="pass" type="password" minlength=8 maxlength=20 pattern=	
                         "^(?=(.*[a-zA-Z].*){2,})(?=.*\d.*)(?=.*\W.*)[a-zA-Z0-9\S]{8,20}$" required>
                         <div class='valid-feedback mx-5'>Ok</div>
                         <div class='invalid-feedback mx-5'>Password must contain an uppercase, lowercase, number, and special character and be between 8-20 characters</div>

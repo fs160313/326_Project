@@ -20,8 +20,30 @@
     event.preventDefault();
     event.stopPropagation();
     }
+    else{
+        let email = $('#email').val();
+        let user = $('#user').val();
+        let pass = $('#pass').val();
+        $.ajax({
+            url: "http://localhost:7311/user",
+            type: "POST",
+            dataType: "json",
+            data: {
+              "username": user,
+              "password": pass,
+              "email": email,
+              "monthly_payment": 0,
+              "projected_salary": 0,
+            }
+          })
+          .done(data => {
+            console.log(data);
+          });
+    }
     form.classList.add('was-validated');
     }, false);
     });
     }, false);
     })();
+
+
