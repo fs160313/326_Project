@@ -12,6 +12,19 @@ class Loan():
 class Calculator():
     def __init__(self, PP):
         self.PP = PP
+    def score_loan(self, loan):
+        return loan.amount * (1+loan.interest_rate/100)
+    def rank_loans(self):
+        loan_scores = {loan: self.score_loan(loan) for loan in self.PP.loans}
+        loan_rankings = sorted(loan_scores.items(), key=lambda x: x[1], reverse=True)
+        return loan_rankings    #[loan: score] from highest score to lowest
+    def accrue_interest(self, months_passed):
+        for loan in self.PP.loans:
+            if loan.subsidized:
+                if PP.today_months + months_passed > self.PP.grad_date:
+                    loan.left_to_pay = loan.left_to_pay*(1+loan.interest_rate/(100*365))**(365/12) #add daily interest for the month
+            else:
+                loan.left_to_pay = loan.left_to_pay*(1+loan.interest_rate/(100*365))**(365/12) #add daily interest for the month
     def calc_months_consolidated(self):
         num_months = 0
         total = self.PP.principal
@@ -22,19 +35,6 @@ class Calculator():
             total-=self.PP.monthly_payment
             total_paid += self.PP.monthly_payment if total > 0 else self.PP.monthly_payment + total
         return num_months, total_paid
-    def score_loan(self, loan):
-        return loan.amount * (1+loan.interest_rate/100)
-    def rank_loans(self):
-        loan_scores = {loan: self.score_loan(loan) for loan in self.PP.loans}
-        loan_rankings = sorted(loan_scores.items(), key=lambda x: x[1], reverse=True)
-        return loan_rankings    #[loan: score] from highest score to lowest
-    def accrue_interest(self):
-        for loan in self.PP.loans:
-            if loan.subsidized:
-                # calc if its accruing or not yet 
-                loan.left_to_pay = loan.left_to_pay*(1+loan.interest_rate/(100*365))**(365/12) #add daily interest for the month
-            else:
-                loan.left_to_pay = loan.left_to_pay*(1+loan.interest_rate/(100*365))**(365/12) #add daily interest for the month
     def calc_months_highest_first(self):
         num_months = 0
         total_paid = 0
@@ -52,7 +52,7 @@ class Calculator():
                     total_paid += loan.left_to_pay
                     money_left -= loan.left_to_pay
                     loan.left_to_pay = 0
-            self.accrue_interest()
+            self.accrue_interest(num_months)
             num_months += 1
         return num_months, total_paid
     def calc_months_weighted(self):
@@ -61,13 +61,13 @@ class Calculator():
         for loan in self.PP.loans:
             loan.left_to_pay = loan.amount
         while sum([loan.left_to_pay for loan in self.PP.loans]) > 0: #while there is still some loans to pay
-            ranked_loans = self.rank_loans() #[loan: score] from highest score to lowest
-            money_left = self.PP.monthly_payment #start with entire monthly payment
+            ranked_loans = self.rank_loans()                         #[loan: score] from highest score to lowest
+            money_left = self.PP.monthly_payment                     #start with entire monthly payment
             for loan, score in ranked_loans:
                 normalized_score = score/sum([score for (loan, score) in ranked_loans])
                 loan.left_to_pay -= self.PP.monthly_payment*normalized_score
                 total_paid +=  self.PP.monthly_payment*normalized_score
-            self.accrue_interest()
+            self.accrue_interest(num_months)
             num_months += 1
         return num_months, total_paid
 
@@ -76,8 +76,8 @@ class Payment_Plan():
         self.loans = []
     def read_json(self, data):
         json_object = json.loads(data)
-        self.monthly_payment = float(json_object["monthly_payment"])    # 0 if months entered
-        self.grad_date = self.parse_date(json_object["grad_date"])
+        self.monthly_payment = float(json_object["monthly_payment"])
+        self.parse_date(json_object["grad_date"])
         loan_number = 0
         for loan in json_object["loans"]:
             self.loans.append(Loan(loan_number, loan["amount"], loan["interest"], loan["subsidized"]))
@@ -87,9 +87,8 @@ class Payment_Plan():
         month, year = date_string.split()
         today = datetime.date.today()
         grad = datetime.date(int(year), int(month), 30)
-        today_months = today.year*12+today.month
-        grad_months = grad.year*12+grad.month
-        return grad_months-today_months if grad_months > today_months else 0
+        self.today_months = today.year*12+today.month
+        self.grad_date = grad.year*12+grad.month
     def consolidate(self):
         self.principal = sum([loan.amount for loan in self.loans])
         weights = {loan.id: loan.amount/self.principal for loan in self.loans}
@@ -100,9 +99,15 @@ class Payment_Plan():
         self.consolidated_months, self.consolidated_total_paid = Calc.calc_months_consolidated()
         self.highest_first_months, self.highest_first_total = Calc.calc_months_highest_first()
         self.weighted_months, self.weighted_total = Calc.calc_months_weighted()
-    def graph1_data(self):
-        pass
+    def make_graphs(self):
+        self.pie_chart_consolidated = []
+        self.pie_chart_highest_first = []
+        self.pie_chart_weighted = []
+        # total_over_monthly_consolidated = []
+        # total_over_monthly_highest_first = []
+        # total_over_monthly_weighted = []
     def make_json(self):
+        self.make_graphs()
         data = {}
         data["graphs"] = {}
         data["principal"] = self.principal
@@ -116,7 +121,9 @@ class Payment_Plan():
         data["weighted_months"] = self.weighted_months
         data["weighted_total_paid"] = self.weighted_total
         data["weighted_total_interest"] = self.weighted_total - self.principal
-        data["graphs"]["graph1"] = self.graph1_data()
+        data["graphs"]["pie_chart_consolidated"] = self.pie_chart_consolidated
+        data["graphs"]["pie_chart_highest_first"] = self.pie_chart_highest_first
+        data["graphs"]["pie_chart_weighted"] = self.pie_chart_weighted
         return json.dumps(data)
 
 PP = Payment_Plan()
@@ -126,6 +133,6 @@ PP.calculate()
 print('principal = {}, monthly payment = {}'.format(PP.principal, PP.monthly_payment))
 print('consolidated total = {}, consolidated months = {}'.format(PP.consolidated_total_paid, PP.consolidated_months))
 print('highest first total = {}, highest first months = {}'.format(PP.highest_first_total, PP.highest_first_months))
-print('weighted total = {},weighted months = {}'.format(PP.weighted_total, PP.weighted_months))
+print('weighted total = {}, weighted months = {}'.format(PP.weighted_total, PP.weighted_months))
 PP.make_json()
 # '{"monthly_payment": 200, "grad_date": "5 2016", "loans": [{"amount": 5000, "interest": 5, "subsidized": true}, {"amount": 6000, "interest": 4.5, "subsidized": false}]}'
