@@ -42,11 +42,12 @@ module.exports = {
     });
   },
 
-  verify: function(req, res){
-    console.log(req.query.username);
+  getData: function(req, res){
+    // console.log(req.query.username);
 		User.findOne({username: req.query.username}, function(err, user){
 			if (user != null){
-        res.json({'status': 'success', 'message': 'User found.', 'password': user.password})
+        console.log(user);
+        res.json({'status': 'success', 'message': 'User found.', 'username': user.username, 'password': user.password, 'email': user.email, 'monthly_payment': user.monthly_payment })
 			}
 			else{
 				res.json({'status': 'failure', 'message': 'User not found.'})
