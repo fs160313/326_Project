@@ -21,7 +21,7 @@ module.exports = function(app){
   app.put('/user', userHandler.modifyUser) //done
   app.delete('/user', userHandler.deleteUser) //done
 
-  app.get('/user', userHandler.verify) //done
+  app.get('/user', userHandler.getData) //done
 
   let path = require('path');
   app.get('/create_account', (req, res) => {
