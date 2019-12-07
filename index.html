@@ -74,7 +74,7 @@
                 <button type="button" class="btn btn-danger btn-sm float-right" id="add-Btn">+</button></h3>
             <!-- <button type="button" class="btn btn-outline-danger btn-sm" id="rem-Btn">Remove</button> -->
         </div>
-        <ul class="list-group" id="list">
+        <ul class="list-group" id="loanlist">
         </ul>
     </div>
 
@@ -155,7 +155,7 @@
                             <option value="12">December</option>
                         </select>
                         &nbsp;
-                        <input type="text" class="form-control" aria-label="Default"
+                        <input type="text" id="year" class="form-control" aria-label="Default"
                             aria-describedby="inputGroup-sizing-default">
 
 
@@ -167,7 +167,7 @@
                             <span class="input-group-text">$</span>
                         </div>
 
-                        <input type="text" class="form-control" aria-label="Default"
+                        <input type="text" id="monthlypayment" class="form-control" aria-label="Default"
                             aria-describedby="inputGroup-sizing-default">
 
                         &nbsp; every month, when will I pay off my loans?
@@ -177,7 +177,7 @@
                 </div>
             </div>
             <div class="col-9 col-md-2 mx-auto">
-                <button type="submit" class="btn btn-block btn-lg btn-primary">Calculate</button>
+                <button type="submit" id="calculate" class="btn btn-block btn-lg btn-primary">Calculate</button>
             </div>
         </div>
     </header>
