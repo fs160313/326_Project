@@ -173,5 +173,8 @@ PP.calculate()
 # print('highest first total = {}, highest first months = {}'.format(PP.highest_first_total, PP.highest_first_months))
 # print('weighted total = {}, weighted months = {}'.format(PP.weighted_total, PP.weighted_months))
 # PP.make_graphs()
-PP.make_json()
+
+print(PP.make_json())
+sys.stdout.flush()
+
 # '{"monthly_payment": 200, "grad_date": "5 2020", "loans": [{"amount": 5000, "interest": 5, "subsidized": true}, {"amount": 6000, "interest": 4.5, "subsidized": false}]}'

@@ -5,17 +5,13 @@ const querystring = require('querystring');
 module.exports = {
 
 	createUser: function(req, res){
-    // console.log(req.body)
-		// console.log('made it here2');
 		let user = new User({
 			...req.body
 		});
-    // console.log(user);
 
-    // Returning a promise here
     user.save(function(err, user){
       if (err){
-        res.json({'status': 'failure', 'message': err})
+        res.json({'status': 'failure', 'message': err});
       }
       else{
         res.json({'status': 'success', 'message': 'User with id: ' + user._id + ' saved.'});

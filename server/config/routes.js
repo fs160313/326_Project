@@ -28,9 +28,14 @@ module.exports = function(app){
     res.sendFile(path.join(__dirname + '../../../create_account.html'));
   });
 
-  app.get('/calculate', (req, res) => {
-    const spawn = require("child_process").spawn;
-    const pythonProcess = spawn('python',["../calc.py", '{"monthly_payment": 200, "grad_date": "5 2020", "loans": [{"amount": 5000, "interest": 5, "subsidized": true}, {"amount": 6000, "interest": 4.5, "subsidized": false}]}']);
+  app.post('/calculate', (req, res) => {
+    const { spawn } = require('child_process');
+    let data = ((JSON.stringify(req.body)).toString())
+    const pyProg = spawn('python', [path.join(__dirname + '/../calc.py'), data]);
+    pyProg.stdout.on('data', function(data) {
+        console.log(data.toString());
+        res.json(JSON.parse(data))
+    });
   });
 
 };
