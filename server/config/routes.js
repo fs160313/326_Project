@@ -27,6 +27,10 @@ module.exports = function(app){
   app.get('/create_account', (req, res) => {
     res.sendFile(path.join(__dirname + '../../../create_account.html'));
   });
+  
+  app.get('/index', (req, res) => {
+    res.sendFile(path.join(__dirname + '../../../index.html'));
+  })
 
   app.post('/calculate', (req, res) => {
     const { spawn } = require('child_process');
