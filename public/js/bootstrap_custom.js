@@ -4,7 +4,28 @@ var li = list.getElementsByTagName('li');
 var addBtn = document.getElementById('add-Btn');
 var loanBtn = document.getElementById('part_4');
 
-
+window.addEventListener('load', function(){
+  let cookies = document.cookie.split('; ');
+  let loggedin = cookies[0];
+  let user = cookies[1];
+  if (loggedin == 'loggedin=true'){
+    //replace login/create acct buttons with logout button
+    $('.hide-on-login')[0].before(`Logged in as ${user.replace('user=', '')}`);
+    $('.hide-on-login').each(function(){
+      $(this).addClass('d-none');
+    })
+    $('.show-on-login').each(function(){
+      $(this).removeClass('d-none');
+      this.addEventListener('click', function(){
+        document.cookie = 'loggedin=false';
+        document.cookie =  `user=${null}`;
+        location.reload(true);
+      });
+    });
+    //get loan information from server
+    //propogate loanlist with loan information
+  }
+});
 function showDiv() {
   document.getElementById('calcDiv').style.display = "block";
 }
