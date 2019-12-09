@@ -130,8 +130,7 @@
 
 
     <!-- Question section -->
-    <header class="masthead text-black text-center">
-        <div class="overlay"></div>
+    <header class="masthead">
         <div class="container">
             <div class="row">
                 <div class="col-xl-5 mx-auto">
@@ -177,21 +176,140 @@
                 </div>
             </div>
             <div class="col-9 col-md-2 mx-auto">
-                <button type="submit" id="calculate" class="btn btn-block btn-lg btn-primary">Calculate</button>
+                <button type="submit" id="calculate" class="btn btn-block btn-lg btn-primary"
+                    onclick="showDiv()">Calculate</button>
             </div>
         </div>
     </header>
 
 
+    <div id="calcDiv" style="display:none;">
 
+        <div class="col-sm-9 mx-auto py-3">
+
+            <p class="h3 text-center py-2">Consolidated Plan</p>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Months</h5>
+                            <p class="card-text">
+                                   <p class="lead" id="cons_month"></p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Interest</h5>
+                            <p class="card-text">
+                                <p class="lead" id="cons_tint"></p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Paid</h5>
+                            <p class="card-text">
+                                <p class="lead" id="cons_tpaid"></p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-9 mx-auto py-3">
+
+                <p class="h3 text-center py-2">Highest-First Plan</p>
+    
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Months</h5>
+                                <p class="card-text">
+                                       <p class="lead" id="hf_month"></p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Interest</h5>
+                                <p class="card-text">
+                                    <p class="lead" id="hf_tint"></p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Paid</h5>
+                                <p class="card-text">
+                                    <p class="lead" id="hf_tpaid"></p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+
+            <div class="col-sm-9 mx-auto py-3">
+
+                    <p class="h3 text-center py-2">Weighted Plan</p>
+        
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Months</h5>
+                                    <p class="card-text">
+                                           <p class="lead" id="w_month"></p>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Interest</h5>
+                                    <p class="card-text">
+                                        <p class="lead" id="w_tint"></p>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Paid</h5>
+                                    <p class="card-text">
+                                        <p class="lead" id="w_tpaid"></p>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                </div>
+
+    </div>
 
 
 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>

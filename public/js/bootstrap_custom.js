@@ -3,8 +3,11 @@ var list = document.getElementById('loanlist');
 var li = list.getElementsByTagName('li');
 var addBtn = document.getElementById('add-Btn');
 var loanBtn = document.getElementById('part_4');
-var loan_data;
 
+
+function showDiv() {
+  document.getElementById('calcDiv').style.display = "block";
+}
 
 function activeItem() {
   title.innerHTML = this.innerText;
@@ -31,6 +34,7 @@ $("ul").on("click", "button", function(e) {
   e.preventDefault();
   $(this).parent().remove();
 });
+
 $("#calculate")[0].addEventListener('click', function() {
   let grad_date = $("#months").children('option:selected').val() + " " + $("#year").val()
   let monthly_payment = $("#monthlypayment").val()
@@ -64,5 +68,22 @@ $("#calculate")[0].addEventListener('click', function() {
   })
   .done(data => {
     console.log(data);
+
+    $('#cons_month').append(data.consolidated_months);
+    $('#cons_tint').append(data.consolidated_total_interest);
+    $('#cons_tpaid').append(data.consolidated_total_paid);
+
+    $('#hf_month').append(data.highest_first_months);
+    $('#hf_tint').append(data.highest_first_total_interest);
+    $('#hf_tpaid').append(data.highest_first_total_paid);
+
+    $('#w_month').append(data.weighted_months);
+    $('#w_tint').append(data.weighted_total_interest);
+    $('#w_tpaid').append(data.weighted_total_paid);
   });
 })
+
+
+
+
+
