@@ -35,6 +35,14 @@ module.exports = {
   Returns: An array of loans
   */
   addLoans: function(req, res){
+    Loan.deleteMany({'user_id': req.body.user_id}, function(err, loan){
+          if (err){
+            console.log({'status': 'failure', 'message': err});
+          }
+          else{
+            console.log({'status': 'success'});
+          }
+        });
     let loans_arr = req.body.loans;
     loans_arr.forEach(loan_i => {
       let loan = new Loan({
@@ -43,13 +51,14 @@ module.exports = {
       });
       loan.save(function(err, loan){
         if (err){
-          res.json({'status': 'failure', 'message': err})
+          console.log('')
         }
         else{
-          res.json({'status': 'success', 'message': 'Loan with id: ' + loan._id + ' saved.'});
+          console.log('')
         }
       });
     });
+    res.json({'status': "success"});
   },
 
   findLoans: function(req, res){
@@ -75,16 +84,16 @@ module.exports = {
     });
   },
 
-  deleteLoan: function(req, res){
-    Loan.deleteOne({'_id': req.body.loan_id}, function(err, loan){
-      if (err){
-        res.json({'status': 'failure', 'message': err});
-      }
-      else{
-        res.json({'status': 'success'});
-      }
-    });
-  }
+  // deleteLoan: function(req, res){
+  //   Loan.deleteMany({'user_id': req.body.user_id}, function(err, loan){
+  //     // if (err){
+  //     //   res.json({'status': 'failure', 'message': err});
+  //     // }
+  //     // else{
+  //     //   res.json({'status': 'success'});
+  //     // }
+  //   });
+  //}
   
 
 };

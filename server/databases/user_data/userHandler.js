@@ -47,7 +47,7 @@ module.exports = {
 		User.findOne({username: req.query.username}, function(err, user){
 			if (user != null){
         console.log(user);
-        res.json({'status': 'success', 'message': 'User found.', 'username': user.username, 'password': user.password, 'email': user.email, 'monthly_payment': user.monthly_payment })
+        res.json({'status': 'success', 'message': 'User found.', 'username': user.username, 'password': user.password, 'email': user.email, 'monthly_payment': user.monthly_payment, '_id': user._id})
 			}
 			else{
 				res.json({'status': 'failure', 'message': 'User not found.'})

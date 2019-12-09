@@ -8,6 +8,7 @@ window.addEventListener('load', function(){
   let cookies = document.cookie.split('; ');
   let loggedin = cookies[0];
   let user = cookies[1];
+  let userid = cookies[2].replace('userid=', '');
   if (loggedin == 'loggedin=true'){
     //replace login/create acct buttons with logout button
     $('.hide-on-login')[0].before(`Logged in as ${user.replace('user=', '')}`);
@@ -16,14 +17,31 @@ window.addEventListener('load', function(){
     })
     $('.show-on-login').each(function(){
       $(this).removeClass('d-none');
-      this.addEventListener('click', function(){
-        document.cookie = 'loggedin=false';
-        document.cookie =  `user=${null}`;
-        location.reload(true);
-      });
+    });
+    $('.show-on-login')[0].addEventListener('click', function(){
+      document.cookie = 'loggedin=false';
+      document.cookie =  `user=${null}`;
+      document.cookie = `userid=${null}`;
+      location.reload(true);
     });
     //get loan information from server
-    //propogate loanlist with loan information
+    $.ajax({
+      url: "http://localhost:7311/loan",
+      type: "GET",
+      dataType: "json",
+      data: {
+        'user_id': userid
+      }
+    }).done(data => {
+      //propogate loanlist with loan information
+      loans = data.loans;
+      loans.forEach(element => {
+        let amount = element.amount;
+        let interest = element.interest;
+        let sub = element.subsidized;
+        $("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul></li>`);
+      });
+    });
   }
 });
 function showDiv() {
@@ -119,10 +137,49 @@ $("#login")[0].addEventListener('click', function(){
     else if(data.password != pass)
       window.alert('Invalid username or password.');
     else{
+      console.log(data);
       document.cookie = 'loggedin=true';
       document.cookie =  `user=${user}`;
+      document.cookie = `userid=${data._id}`;
       location.reload();
-      
     }
   });
+});
+$("#save")[0].addEventListener('click', function(){
+  let loansarr = [];
+  let cookies = document.cookie.split('; ');
+  let loggedin = cookies[0];
+  let user = cookies[1];
+  let userid = cookies[2];
+
+  // $.ajax({
+  //   url: "http://localhost:7311/loan",
+  //   type: "DELETE",
+  //   dataType: "json",
+  //   data: {
+  //     'user_id': cookies[2].replace('userid=', '')
+  //   }
+  // });
+
+  let loanItems = document.getElementsByClassName('loanItem');
+  for (let i = 0; i < loanItems.length; i++){
+    let amount = (loanItems[i].getElementsByClassName('amount')[0]).innerHTML;
+    let interest = (loanItems[i].getElementsByClassName('interest')[0]).innerHTML;
+    let subsidized = (loanItems[i].getElementsByClassName('subsidized')[0]).innerHTML;
+    let loan = {
+      "amount": amount,
+      "interest": interest,
+      "subsidized": subsidized === 'Subsidized'
+    };
+    loansarr.push(loan);
+  }
+  $.ajax({
+    url: "http://localhost:7311/loan",
+    type: "POST",
+    dataType: "json",
+    data: {
+      'user_id': cookies[2].replace('userid=', ''),
+      'loans': loansarr
+    }
+    }).done(window.alert("Loans saved successfully."));
 });

@@ -14,7 +14,7 @@ module.exports = function(app){
   app.post('/loan', loanHandler.addLoans)
   app.get('/loan', loanHandler.findLoans);
   app.put('/loan', loanHandler.modifyLoan)
-  app.delete('/loan', loanHandler.deleteLoan) 
+  //app.delete('/loan', loanHandler.deleteLoan) 
 
   //routes for user endpoints
   app.post('/user', userHandler.createUser) //done
