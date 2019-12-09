@@ -40,8 +40,12 @@
             if(data.status == "failure"){
               event.preventDefault();
               event.stopPropagation();
-              window.alert("Username already taken, please try another one.")
+              window.alert("Username already taken, please try another one.");
             }
+            else
+              document.cookie = 'loggedin=true';
+              document.cookie = `user=${user}`;
+              window.location.href='index';
           });
     }
     form.classList.add('was-validated');
