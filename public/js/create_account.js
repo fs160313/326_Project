@@ -45,6 +45,7 @@
             else
               document.cookie = 'loggedin=true';
               document.cookie = `user=${user}`;
+              document.cookie = `userid=${data._id}`;
               window.location.href='index';
           });
     }

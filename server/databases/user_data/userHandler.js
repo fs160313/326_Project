@@ -14,7 +14,7 @@ module.exports = {
         res.json({'status': 'failure', 'message': err});
       }
       else{
-        res.json({'status': 'success', 'message': 'User with id: ' + user._id + ' saved.'});
+        res.json({'status': 'success', '_id': user._id, 'message': 'User with id: ' + user._id + ' saved.'});
       }
     });
   },
