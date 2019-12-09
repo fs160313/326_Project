@@ -31,6 +31,7 @@ $("ul").on("click", "button", function(e) {
   e.preventDefault();
   $(this).parent().remove();
 });
+
 $("#calculate")[0].addEventListener('click', function() {
   let grad_date = $("#months").children('option:selected').val() + " " + $("#year").val()
   let monthly_payment = $("#monthlypayment").val()
@@ -42,7 +43,6 @@ $("#calculate")[0].addEventListener('click', function() {
     "grad_date": grad_date,
     "loans": []
   }
-
   let loanItems = document.getElementsByClassName('loanItem');
   for (let i = 0; i < loanItems.length; i++){
     let amount = (loanItems[i].getElementsByClassName('amount')[0]).innerHTML;
@@ -65,4 +65,27 @@ $("#calculate")[0].addEventListener('click', function() {
   .done(data => {
     console.log(data);
   });
-})
+});
+
+$("#login")[0].addEventListener('click', function(){
+  let user = $("#defaultForm-username")[0].value;
+  let pass = $("#defaultForm-pass")[0].value;
+  $.ajax({
+    url: "http://localhost:7311/user",
+    type: "GET",
+    dataType: "json",
+    data: {
+      "username": user
+    }
+  }).done(data => {
+    if(data.status == 'failure')
+      window.alert('Invalid username or password.');
+    else if(data.password != pass)
+      window.alert('Invalid username or password. (test user found)')
+    else{
+      document.cookie = 'loggedin=true';
+      document.cookie =  `user=${user}`;
+      console.log(document.cookie);
+    }
+  });
+});

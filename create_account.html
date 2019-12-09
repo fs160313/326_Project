@@ -17,7 +17,7 @@
             <article class="card-body mx-auto">
                 <h4 class="card-title text-center">Create an Account</h4>
                 <p class="text-center">Signing up is easy and allows you to save your plan for later!</p>
-                <form method="post" action="index.html" target="_blank" class="needs-validation" novalidate>
+                <form method="GET" action="user" target="_self" class="needs-validation" novalidate>
                     <div class="form-group input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><img src="img/email.jpg" alt="email icon" width="24" height="24"></span>
@@ -53,8 +53,8 @@
                         <div class='invalid-feedback mx-5' id="confinval">Passwords don't match</div>
                     </div>
                     <div class="form-group input-group justify-content-center">
-                        <button type="submit" class="btn btn-primary mx-3">Create</button>
-                        <button onclick = "location.href = 'index';"class="btn btn-secondary mx-3">Go Back</button>
+                        <button method= type="submit" class="btn btn-primary mx-3">Create</button>
+                        <button onclick="location.href = 'index';"class="btn btn-secondary mx-3">Go Back</button>
                     </div> 
                 </form>
             </article>
