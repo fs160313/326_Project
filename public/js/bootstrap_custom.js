@@ -38,7 +38,9 @@ window.addEventListener('load', function(){
       loans.forEach(element => {
         let amount = element.amount;
         let interest = element.interest;
-        let sub = element.subsidized;
+        let sub;
+        if (element.subsidized) sub = 'Subsidized';
+        else sub = 'Unsubsidized';
         $("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul></li>`);
       });
     });
