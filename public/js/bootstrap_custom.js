@@ -81,11 +81,12 @@ $("#login")[0].addEventListener('click', function(){
     if(data.status == 'failure')
       window.alert('Invalid username or password.');
     else if(data.password != pass)
-      window.alert('Invalid username or password. (test user found)')
+      window.alert('Invalid username or password.');
     else{
       document.cookie = 'loggedin=true';
       document.cookie =  `user=${user}`;
-      console.log(document.cookie);
+      location.reload();
+      
     }
   });
 });
