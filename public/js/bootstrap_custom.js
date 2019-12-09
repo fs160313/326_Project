@@ -41,7 +41,7 @@ window.addEventListener('load', function(){
         let sub;
         if (element.subsidized) sub = 'Subsidized';
         else sub = 'Unsubsidized';
-        $("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul><button onclick="closeParent()">[-]</button></li>`);
+        $("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul><button>[-]</button></li>`);
       });
     });
   }
@@ -66,7 +66,7 @@ loanBtn.addEventListener('click', function() {
   var interest = document.getElementById("part_2").value;
   var sub = document.getElementById("part_3").value;
   //list.innerHTML += '<li class="list-group-item">' + "$" + amount + ",  %" + interest + ",  " + sub + '&nbsp;' + ' <button> - </button>' + '</li>';
-  $("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul><button onclick="closeParent()">[-]</button></li>`);
+  $("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul><button onclick="">[-]</button></li>`);
   $('#modalLoanForm').modal('hide');
   $('#modalLoanForm').trigger("reset");
 });
@@ -185,6 +185,3 @@ $("#save")[0].addEventListener('click', function(){
     }
     }).done(window.alert("Loans saved successfully."));
 });
-function closeParent(e){
-  e.currentTarget.parentNode.remove();
-}
