@@ -33,7 +33,6 @@ module.exports = function(app){
   })
 
   app.post('/calculate', (req, res) => {
-    console.log("Life is hard.");
     if (!req.body.monthly_payment){
       res.json({'status': 'failure', 'error': 'monthly_payment'});
     }
@@ -43,9 +42,8 @@ module.exports = function(app){
     }
     const { spawn } = require('child_process');
     let data = ((JSON.stringify(req.body)).toString())
-    const pyProg = spawn('python', [path.join(__dirname + '/../calc.py'), data]);
+    const pyProg = spawn('python3', [path.join(__dirname + '/../calc.py'), data]);
     pyProg.stdout.on('data', function(data) {
-        console.log(data.toString());
         res.json(JSON.parse(data))
     });
   });
