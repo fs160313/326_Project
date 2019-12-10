@@ -109,6 +109,19 @@ $("#calculate")[0].addEventListener('click', function() {
   .done(data => {
     console.log(data);
 
+
+    $("#cons_month").html("");
+    $("#cons_tint").html("");
+    $("#cons_tpaid").html("");
+
+    $("#hf_month").html("");
+    $("#hf_tint").html("");
+    $("#hf_tpaid").html("");
+
+    $("#w_month").html("");
+    $("#w_tint").html("");
+    $("#w_tpaid").html("");
+
     $('#cons_month').append(data.consolidated_months);
     $('#cons_tint').append(data.consolidated_total_interest);
     $('#cons_tpaid').append(data.consolidated_total_paid);
