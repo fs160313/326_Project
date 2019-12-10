@@ -42,7 +42,7 @@ window.addEventListener('load', function(){
         if (element.subsidized) sub = 'Subsidized';
         else sub = 'Unsubsidized';
         //$("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul><button>[-]</button></li>`);
-        $("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center">' +  'Amount: <span class="badge badge-success">$' + amount + '</span>' + 'Interest: <span class="badge badge-secondary">' + interest + '%</span> ' + 'Type: <span class="badge badge-secondary">' + sub + '</span> <button onclick="" type="button" class="btn btn-sm btn-outline-danger">-</button></li>');
+        $("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center loanItem">' +  'Amount: <span class="badge badge-success amount">$' + amount + '</span>' + 'Interest: <span class="badge badge-secondary interest">' + interest + '%</span> ' + 'Type: <span class="badge badge-secondary subsidized">' + sub + '</span> <button onclick="" type="button" class="btn btn-sm btn-outline-danger">-</button></li>');
       });
     });
   }
@@ -69,7 +69,7 @@ loanBtn.addEventListener('click', function() {
   //list.innerHTML += '<li class="list-group-item">' + "$" + amount + ",  %" + interest + ",  " + sub + '&nbsp;' + ' <button> - </button>' + '</li>';
   //$("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul><button onclick="">[-]</button></li>`);
   //$("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center">Interest: ' + interest + ', Type: ' + sub + '<span class="badge badge-success">$' + amount + '</span></li>');
-  $("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center">' +  'Amount: <span class="badge badge-success">$' + amount + '</span>' + 'Interest: <span class="badge badge-secondary">' + interest + '%</span> ' + 'Type: <span class="badge badge-secondary">' + sub + '</span> <button onclick="" type="button" class="btn btn-sm btn-outline-danger">-</button></li>');
+  $("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center loanItem">' +  'Amount: <span class="badge badge-success amount">$' + amount + '</span>' + 'Interest: <span class="badge badge-secondary interest">' + interest + '%</span> ' + 'Type: <span class="badge badge-secondary subsidized">' + sub + '</span> <button onclick="" type="button" class="btn btn-sm btn-outline-danger">-</button></li>');
 
   $('#modalLoanForm').modal('hide');
   $('#modalLoanForm').trigger("reset");
@@ -93,9 +93,10 @@ $("#calculate")[0].addEventListener('click', function() {
   }
   let loanItems = document.getElementsByClassName('loanItem');
   for (let i = 0; i < loanItems.length; i++){
-    let amount = (loanItems[i].getElementsByClassName('amount')[0]).innerHTML;
-    let interest = (loanItems[i].getElementsByClassName('interest')[0]).innerHTML;
+    let amount = (loanItems[i].getElementsByClassName('amount')[0]).innerHTML.replace('$', '');
+    let interest = (loanItems[i].getElementsByClassName('interest')[0]).innerHTML.replace('%','');
     let subsidized = (loanItems[i].getElementsByClassName('subsidized')[0]).innerHTML;
+    console.log(amount, interest, subsidized);
     let loan = {
       "amount": amount,
       "interest": interest,
@@ -191,8 +192,8 @@ $("#save")[0].addEventListener('click', function(){
 
   let loanItems = document.getElementsByClassName('loanItem');
   for (let i = 0; i < loanItems.length; i++){
-    let amount = (loanItems[i].getElementsByClassName('amount')[0]).innerHTML;
-    let interest = (loanItems[i].getElementsByClassName('interest')[0]).innerHTML;
+    let amount = (loanItems[i].getElementsByClassName('amount')[0]).innerHTML.replace('$', '');
+    let interest = (loanItems[i].getElementsByClassName('interest')[0]).innerHTML.replace('%','');
     let subsidized = (loanItems[i].getElementsByClassName('subsidized')[0]).innerHTML;
     let loan = {
       "amount": amount,
