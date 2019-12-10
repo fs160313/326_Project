@@ -41,7 +41,8 @@ window.addEventListener('load', function(){
         let sub;
         if (element.subsidized) sub = 'Subsidized';
         else sub = 'Unsubsidized';
-        $("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul><button>[-]</button></li>`);
+        //$("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul><button>[-]</button></li>`);
+        $("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center">' +  'Amount: <span class="badge badge-success">$' + amount + '</span>' + 'Interest: <span class="badge badge-secondary">' + interest + '%</span> ' + 'Type: <span class="badge badge-secondary">' + sub + '</span> <button onclick="" type="button" class="btn btn-sm btn-outline-danger">-</button></li>');
       });
     });
   }
@@ -66,7 +67,10 @@ loanBtn.addEventListener('click', function() {
   var interest = document.getElementById("part_2").value;
   var sub = document.getElementById("part_3").value;
   //list.innerHTML += '<li class="list-group-item">' + "$" + amount + ",  %" + interest + ",  " + sub + '&nbsp;' + ' <button> - </button>' + '</li>';
-  $("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul><button onclick="">[-]</button></li>`);
+  //$("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul><button onclick="">[-]</button></li>`);
+  //$("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center">Interest: ' + interest + ', Type: ' + sub + '<span class="badge badge-success">$' + amount + '</span></li>');
+  $("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center">' +  'Amount: <span class="badge badge-success">$' + amount + '</span>' + 'Interest: <span class="badge badge-secondary">' + interest + '%</span> ' + 'Type: <span class="badge badge-secondary">' + sub + '</span> <button onclick="" type="button" class="btn btn-sm btn-outline-danger">-</button></li>');
+
   $('#modalLoanForm').modal('hide');
   $('#modalLoanForm').trigger("reset");
 });
