@@ -42,7 +42,7 @@ window.addEventListener('load', function () {
         if (element.subsidized) sub = 'Subsidized';
         else sub = 'Unsubsidized';
         //$("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul><button>[-]</button></li>`);
-        $("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center loanItem">' + 'Amount: <span class="badge badge-success amount">$' + amount + '</span>' + 'Interest: <span class="badge badge-secondary interest">' + interest + '%</span> ' + 'Type: <span class="badge badge-secondary subsidized">' + sub + '</span> <button onclick="" type="button" class="btn btn-sm btn-outline-danger">-</button></li>');
+        $("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center loanItem">' + 'Amount: <span class="badge badge-info amount">$' + amount + '</span>' + 'Interest: <span class="badge badge-secondary interest">' + interest + '%</span> ' + 'Type: <span class="badge badge-secondary subsidized">' + sub + '</span> <button onclick="" type="button" class="btn btn-sm btn-outline-danger">-</button></li>');
       });
     });
   }
@@ -70,7 +70,7 @@ loanBtn.addEventListener('click', function () {
   //list.innerHTML += '<li class="list-group-item">' + "$" + amount + ",  %" + interest + ",  " + sub + '&nbsp;' + ' <button> - </button>' + '</li>';
   //$("#loanlist").append(`<li><ul class='loanItem'><li class='amount'>${amount}</li><li class='interest'>${interest}</li><li class='subsidized'>${sub}</li></ul><button onclick="">[-]</button></li>`);
   //$("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center">Interest: ' + interest + ', Type: ' + sub + '<span class="badge badge-success">$' + amount + '</span></li>');
-  $("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center loanItem">' + 'Amount: <span class="badge badge-success amount">$' + amount + '</span>' + 'Interest: <span class="badge badge-secondary interest">' + interest + '%</span> ' + 'Type: <span class="badge badge-secondary subsidized">' + sub + '</span> <button onclick="" type="button" class="btn btn-sm btn-outline-danger">-</button></li>');
+  $("#loanlist").append('<li class="list-group-item d-flex justify-content-between align-items-center loanItem">' + 'Amount: <span class="badge badge-info amount">$' + amount + '</span>' + 'Interest: <span class="badge badge-secondary interest">' + interest + '%</span> ' + 'Type: <span class="badge badge-secondary subsidized">' + sub + '</span> <button onclick="" type="button" class="btn btn-sm btn-outline-danger">-</button></li>');
 
   $('#modalLoanForm').modal('hide');
   $('#modalLoanForm').trigger("reset");
@@ -153,9 +153,9 @@ $("#calculate")[0].addEventListener('click', function () {
     });
 
   function makeGraphs(data) {
-    var dark_blue = ['rgba(0,130,130)'];//['rgba(0,51,51)'];
-    var light_blue = ['rgba(0,102,102)'];
-    var dark_yellow = ['rgba(255,229,204)'];//['rgba(255,178,102)'];
+    var dark_blue = ['rgba(58,107,107)'];//['rgba(0,51,51)'];
+    var light_blue = ['rgba(161,192,192)'];
+    var dark_yellow = ['rgba(242,203,113)'];//['rgba(255,178,102)'];
     var light_yellow = ['rgba(255,229,204)'];
 
     // Bar Graph
