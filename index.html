@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
 
     <!-- <title>Hello, world!</title> -->
 </head>
@@ -24,15 +24,15 @@
             <span class="float-right">
                 <a class="btn btn-outline-primary hide-on-login" href="create_account">Register</a>
                 <a class="btn btn-outline-primary show-on-login d-none ml-2">Log Out</a>
-                <a class="btn btn-primary hide-on-login" data-toggle="modal" data-target="#modalLoginForm" href="#">Sign In</a>
+                <a class="btn btn-primary hide-on-login" data-toggle="modal" data-target="#modalLoginForm" href="#">Sign
+                    In</a>
             </span>
         </div>
     </nav>
 
     <!-- Modal Sign In -->
 
-    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -80,8 +80,7 @@
     </div>
 
     <!-- Loan Modal Form -->
-    <div class="modal fade" id="modalLoanForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalLoanForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -155,8 +154,7 @@
                             <option value="12">December</option>
                         </select>
                         &nbsp;
-                        <input type="text" id="year" class="form-control" aria-label="Default"
-                            aria-describedby="inputGroup-sizing-default">
+                        <input type="text" id="year" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 
 
                     </div>
@@ -177,17 +175,22 @@
                 </div>
             </div>
             <div class="col-9 col-lg-2 mx-auto">
-                <button type="submit" id="save" class="btn btn-lg btn-block btn-secondary show-on-login d-none">Save Loans</button>
-                <button type="submit" id="calculate" class="btn btn-lg btn-block btn-primary"
-                    onclick="showDiv()">Calculate</button>
+                <button type="submit" id="save" class="btn btn-lg btn-block btn-secondary show-on-login d-none">Save
+                    Loans</button>
+                <button type="submit" id="calculate" class="btn btn-lg btn-block btn-primary" onclick="showDiv()">Calculate</button>
             </div>
         </div>
     </header>
 
+    <div class="col-sm-8 mx-auto py-3">
+
+        <canvas id="stackedBarChart"></canvas>
+
+    </div>
 
     <div id="calcDiv" style="display:none;">
 
-        <div class="col-sm-9 mx-auto py-3">
+        <div class="col-sm-8 mx-auto py-3">
 
             <p class="h3 text-center py-2">Consolidated Plan</p>
 
@@ -197,12 +200,12 @@
                         <div class="card-body">
                             <h5 class="card-title">Months</h5>
                             <p class="card-text">
-                                   <p class="lead" id="cons_month"></p>
+                                <p class="lead" id="cons_month"></p>
                             </p>
                         </div>
+
                     </div>
-                </div>
-                <div class="col-sm-4">
+
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Total Interest</h5>
@@ -211,8 +214,8 @@
                             </p>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-4">
+
+
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Total Paid</h5>
@@ -222,101 +225,119 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-sm-5">
+
+                    <canvas id="pieChartConsolidated"></canvas>
+
+                </div>
+
+
+            </div>
+
+
+
+            <p class="h3 text-center py-2">Highest-First Plan</p>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Months</h5>
+                            <p class="card-text">
+                                <p class="lead" id="hf_month"></p>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Interest</h5>
+                            <p class="card-text">
+                                <p class="lead" id="hf_tint"></p>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Paid</h5>
+                            <p class="card-text">
+                                <p class="lead" id="hf_tpaid"></p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+
+                    <canvas id="pieChartHighest"></canvas>
+
+                </div>
+            </div>
+
+
+
+
+
+            <p class="h3 text-center py-2">Weighted Plan</p>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Months</h5>
+                            <p class="card-text">
+                                <p class="lead" id="w_month"></p>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Interest</h5>
+                            <p class="card-text">
+                                <p class="lead" id="w_tint"></p>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Paid</h5>
+                            <p class="card-text">
+                                <p class="lead" id="w_tpaid"></p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-5">
+
+                    <canvas id="pieChartWeighted"></canvas>
+
+                </div>
             </div>
 
         </div>
-
-        <div class="col-sm-9 mx-auto py-3">
-
-                <p class="h3 text-center py-2">Highest-First Plan</p>
-    
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Months</h5>
-                                <p class="card-text">
-                                       <p class="lead" id="hf_month"></p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Interest</h5>
-                                <p class="card-text">
-                                    <p class="lead" id="hf_tint"></p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Paid</h5>
-                                <p class="card-text">
-                                    <p class="lead" id="hf_tpaid"></p>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-            </div>
-
-            <div class="col-sm-9 mx-auto py-3">
-
-                    <p class="h3 text-center py-2">Weighted Plan</p>
-        
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Months</h5>
-                                    <p class="card-text">
-                                           <p class="lead" id="w_month"></p>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Total Interest</h5>
-                                    <p class="card-text">
-                                        <p class="lead" id="w_tint"></p>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Total Paid</h5>
-                                    <p class="card-text">
-                                        <p class="lead" id="w_tpaid"></p>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        
-                </div>
 
     </div>
 
 
 
 
+
     <!-- Optional JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="js/bootstrap_custom.js"></script>
 </body>
