@@ -33,6 +33,7 @@ module.exports = function(app){
   })
 
   app.post('/calculate', (req, res) => {
+    console.log("Life is hard.");
     if (!req.body.monthly_payment){
       res.json({'status': 'failure', 'error': 'monthly_payment'});
     }
