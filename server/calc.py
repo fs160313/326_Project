@@ -57,25 +57,34 @@ class Calculator():
         return num_months, total_paid, total_paid - self.PP.principal
     def calc_months_weighted(self):
         num_months = 0
-        total_paid = 0
+        self.total_paid = 0
         for loan in self.PP.loans:
             loan.left_to_pay = loan.amount
-        while sum([loan.left_to_pay for loan in self.PP.loans]) > 0: #while there is still some loans to pay
-            ranked_loans = self.rank_loans()                         #[loan: score] from highest score to lowest
-            money_left = self.PP.monthly_payment                     #start with entire monthly payment
-            for loan, score in ranked_loans:
-                normalized_score = score/sum([score for (loan, score) in ranked_loans])
-                payment = self.PP.monthly_payment*normalized_score
-                if loan.left_to_pay > payment:
-                    loan.left_to_pay -= payment
-                    total_paid +=  payment
-                    money_left -= payment
-                else:
-                    total_paid += loan.left_to_pay
-                    loan.left_to_pay = 0
+        while sum([loan.left_to_pay for loan in self.PP.loans]) > 0:      #while there is still some loans to pay
+            self.ranked_loans = self.rank_loans()                         #[loan: score] from highest score to lowest
+            self.money_left = self.PP.monthly_payment                     #start with entire monthly payment
+            def pay():
+                for loan, score in self.ranked_loans:
+                    normalized_score = score/sum([score for (loan, score) in self.ranked_loans])
+                    payment = self.PP.monthly_payment*normalized_score
+                    if self.money_left < payment:
+                        payment = self.money_left
+                    if loan.left_to_pay > payment:
+                        loan.left_to_pay -= payment
+                        self.total_paid +=  payment
+                        self.money_left -= payment
+                    else:
+                        self.total_paid += loan.left_to_pay
+                        self.money_left -= loan.left_to_pay
+                        loan.left_to_pay = 0
+            while self.money_left > 0 and sum([loan.left_to_pay for loan in self.PP.loans]):
+                pay()
+            ('month ended')
             self.accrue_interest(num_months)
             num_months += 1
-        return num_months, total_paid, total_paid - self.PP.principal
+        return num_months, self.total_paid, self.total_paid - self.PP.principal
+
+
 
 class Payment_Plan():
     def __init__(self):
@@ -174,13 +183,13 @@ PP = Payment_Plan()
 PP.read_json(sys.argv[1])
 PP.consolidate()
 PP.calculate()
-# print('principal = {}, monthly payment = {}'.format(PP.principal, PP.monthly_payment))
-# print('consolidated total = {}, consolidated months = {}'.format(round(PP.consolidated_total_paid), PP.consolidated_months))
-# print('highest first total = {}, highest first months = {}'.format(round(PP.highest_first_total), PP.highest_first_months))
-# print('weighted total = {}, weighted months = {}'.format(round(PP.weighted_total), PP.weighted_months))
+print('principal = {}, monthly payment = {}'.format(PP.principal, PP.monthly_payment))
+print('consolidated total = {}, consolidated months = {}'.format(round(PP.consolidated_total_paid), PP.consolidated_months))
+print('highest first total = {}, highest first months = {}'.format(round(PP.highest_first_total), PP.highest_first_months))
+print('weighted total = {}, weighted months = {}'.format(round(PP.weighted_total), PP.weighted_months))
 # PP.make_graphs()
 
 print(PP.make_json())
 sys.stdout.flush()
 
-# '{"monthly_payment": 200, "grad_date": "5 2020", "loans": [{"amount": 5000, "interest": 5, "subsidized": true}, {"amount": 6000, "interest": 4.5, "subsidized": false}]}'
+# '{"monthly_payment": 100, "grad_date": "5 2020", "loans": [{"amount": 5000, "interest": 5, "subsidized": true}, {"amount": 6000, "interest": 4.5, "subsidized": false}]}'
