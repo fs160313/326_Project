@@ -48,6 +48,7 @@ window.addEventListener('load', function(){
   }
 });
 function showDiv() {
+  $("#calcDiv").fadeIn();
   document.getElementById('calcDiv').style.display = "block";
 }
 
