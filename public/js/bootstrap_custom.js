@@ -163,12 +163,12 @@ $("#calculate")[0].addEventListener('click', function () {
         {
           label: 'Principal',
           data: [data.principal, data.principal, data.principal],
-          backgroundColor: [background_color, background_color, background_color]
+          backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 0.2)']
         },
         {
           label: 'Interest',
           data: [data.consolidated_total_interest, data.highest_first_total_interest, data.weighted_total_interest],
-          backgroundColor: [border_color, border_color, border_color]
+          backgroundColor: ['rgba(192, 0, 0, 0.2)', 'rgba(192, 0, 0, 0.2)', 'rgba(192, 0, 0, 0.2)']
         }
 
       ]
