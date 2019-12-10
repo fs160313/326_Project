@@ -132,16 +132,16 @@ $("#calculate")[0].addEventListener('click', function() {
     $("#w_tpaid").html("");
 
     $('#cons_month').append(data.consolidated_months);
-    $('#cons_tint').append(data.consolidated_total_interest);
-    $('#cons_tpaid').append(data.consolidated_total_paid);
+    $('#cons_tint').append("$" + data.consolidated_total_interest);
+    $('#cons_tpaid').append("$" + data.consolidated_total_paid);
 
     $('#hf_month').append(data.highest_first_months);
-    $('#hf_tint').append(data.highest_first_total_interest);
-    $('#hf_tpaid').append(data.highest_first_total_paid);
+    $('#hf_tint').append("$" + data.highest_first_total_interest);
+    $('#hf_tpaid').append("$" + data.highest_first_total_paid);
 
     $('#w_month').append(data.weighted_months);
-    $('#w_tint').append(data.weighted_total_interest);
-    $('#w_tpaid').append(data.weighted_total_paid);
+    $('#w_tint').append("$" + data.weighted_total_interest);
+    $('#w_tpaid').append("$" + data.weighted_total_paid);
   });
 })
 
