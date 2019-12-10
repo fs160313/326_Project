@@ -35,10 +35,12 @@ module.exports = function(app){
   app.post('/calculate', (req, res) => {
     if (!req.body.monthly_payment){
       res.json({'status': 'failure', 'error': 'monthly_payment'});
+      return;
     }
     grad_date_split = (req.body.grad_date).split(' ')
     if (grad_date_split[1] === ''){
       res.json({'status': 'failure', 'error': 'grad_date'});
+      return;
     }
     const { spawn } = require('child_process');
     let data = ((JSON.stringify(req.body)).toString())
