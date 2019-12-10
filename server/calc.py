@@ -65,8 +65,14 @@ class Calculator():
             money_left = self.PP.monthly_payment                     #start with entire monthly payment
             for loan, score in ranked_loans:
                 normalized_score = score/sum([score for (loan, score) in ranked_loans])
-                loan.left_to_pay -= self.PP.monthly_payment*normalized_score
-                total_paid +=  self.PP.monthly_payment*normalized_score
+                payment = self.PP.monthly_payment*normalized_score
+                if loan.left_to_pay > payment:
+                    loan.left_to_pay -= payment
+                    total_paid +=  payment
+                    money_left -= payment
+                else:
+                    total_paid += loan.left_to_pay
+                    loan.left_to_pay = 0
             self.accrue_interest(num_months)
             num_months += 1
         return num_months, total_paid, total_paid - self.PP.principal
@@ -153,14 +159,14 @@ class Payment_Plan():
         data["principal"] = self.principal
         data["weighted_avg_interest"] = self.weight_avg_interest
         data["consolidated_months"] = self.consolidated_months
-        data["consolidated_total_paid"] = self.consolidated_total_paid
-        data["consolidated_total_interest"] = self.consolidated_total_interest
+        data["consolidated_total_paid"] = round(self.consolidated_total_paid)
+        data["consolidated_total_interest"] = round(self.consolidated_total_interest)
         data["highest_first_months"] = self.highest_first_months
-        data["highest_first_total_paid"] = self.highest_first_total
-        data["highest_first_total_interest"] = self.highest_first_total_interest
+        data["highest_first_total_paid"] = round(self.highest_first_total)
+        data["highest_first_total_interest"] = round(self.highest_first_total_interest)
         data["weighted_months"] = self.weighted_months
-        data["weighted_total_paid"] = self.weighted_total
-        data["weighted_total_interest"] = self.weighted_total_interest
+        data["weighted_total_paid"] = round(self.weighted_total)
+        data["weighted_total_interest"] = round(self.weighted_total_interest)
         # data["graphs"] = self.pie_charts()
         return json.dumps(data)
 
@@ -169,9 +175,9 @@ PP.read_json(sys.argv[1])
 PP.consolidate()
 PP.calculate()
 # print('principal = {}, monthly payment = {}'.format(PP.principal, PP.monthly_payment))
-# print('consolidated total = {}, consolidated months = {}'.format(PP.consolidated_total_paid, PP.consolidated_months))
-# print('highest first total = {}, highest first months = {}'.format(PP.highest_first_total, PP.highest_first_months))
-# print('weighted total = {}, weighted months = {}'.format(PP.weighted_total, PP.weighted_months))
+# print('consolidated total = {}, consolidated months = {}'.format(round(PP.consolidated_total_paid), PP.consolidated_months))
+# print('highest first total = {}, highest first months = {}'.format(round(PP.highest_first_total), PP.highest_first_months))
+# print('weighted total = {}, weighted months = {}'.format(round(PP.weighted_total), PP.weighted_months))
 # PP.make_graphs()
 
 print(PP.make_json())
