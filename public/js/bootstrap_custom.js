@@ -107,7 +107,16 @@ $("#calculate")[0].addEventListener('click', function() {
     data: json_object
   })
   .done(data => {
-    console.log(data);
+    if(data.status == 'failure'){
+      if(data.error == 'monthly_payment'){
+        window.alert('Please add a monthly payment.')
+      }
+      else if(data.error == 'grad_date'){
+        window.alert('please add a graduation year.')
+      }
+      event.preventDefault();
+      event.stopPropagation();
+    }
 
 
     $("#cons_month").html("");
