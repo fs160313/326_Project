@@ -153,8 +153,10 @@ $("#calculate")[0].addEventListener('click', function () {
     });
 
   function makeGraphs(data) {
-    var border_color = ['rgba(75, 192, 192, 1)', 'rgba(192, 0, 0, 1)'];
-    var background_color = ['rgba(75, 192, 192, 0.2)', 'rgba(192, 0, 0, 0.2)'];
+    var dark_blue = ['rgba(0,130,130)'];//['rgba(0,51,51)'];
+    var light_blue = ['rgba(0,102,102)'];
+    var dark_yellow = ['rgba(255,229,204)'];//['rgba(255,178,102)'];
+    var light_yellow = ['rgba(255,229,204)'];
 
     // Bar Graph
     var bar_data = {
@@ -163,12 +165,14 @@ $("#calculate")[0].addEventListener('click', function () {
         {
           label: 'Principal',
           data: [data.principal, data.principal, data.principal],
-          backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 0.2)']
+          backgroundColor: [light_blue, light_blue, light_blue],
+          borderColor: [dark_blue, dark_blue, dark_blue]
         },
         {
           label: 'Interest',
           data: [data.consolidated_total_interest, data.highest_first_total_interest, data.weighted_total_interest],
-          backgroundColor: ['rgba(192, 0, 0, 0.2)', 'rgba(192, 0, 0, 0.2)', 'rgba(192, 0, 0, 0.2)']
+          borderColor: [dark_yellow, dark_yellow, dark_yellow],
+          backgroundColor: [light_yellow, light_yellow, light_yellow]
         }
 
       ]
@@ -204,8 +208,8 @@ $("#calculate")[0].addEventListener('click', function () {
         datasets: [
           {
             data: pie_data_consolidated,
-            borderColor: border_color,
-            backgroundColor: background_color,
+            borderColor: [dark_blue, dark_yellow],
+            backgroundColor: [light_blue, light_yellow],
           }
         ]
       },
@@ -225,8 +229,8 @@ $("#calculate")[0].addEventListener('click', function () {
         datasets: [
           {
             data: pie_data_highest,
-            borderColor: border_color,
-            backgroundColor: background_color,
+            borderColor: [dark_blue, dark_yellow],
+            backgroundColor: [light_blue, light_yellow],
           }
         ]
       },
@@ -246,8 +250,8 @@ $("#calculate")[0].addEventListener('click', function () {
         datasets: [
           {
             data: pie_data_weighted,
-            borderColor: border_color,
-            backgroundColor: background_color,
+            borderColor: [dark_blue, dark_yellow],
+            backgroundColor: [light_blue, light_yellow],
           }
         ]
       },
@@ -269,12 +273,12 @@ $("#calculate")[0].addEventListener('click', function () {
         datasets: [{
           data: paid_so_far_consolidated,
           label: "Total Paid",
-          borderColor: background_color,
+          borderColor: light_yellow,
           fill: true
         }, {
           data: left_to_pay_consolidated,
           label: "Left To Pay",
-          borderColor: border_color,
+          borderColor: light_blue,
           fill: false
         }
         ]
@@ -297,12 +301,12 @@ $("#calculate")[0].addEventListener('click', function () {
         datasets: [{
           data: paid_so_far_highest,
           label: "Total Paid",
-          borderColor: background_color,
+          borderColor: light_yellow,
           fill: true
         }, {
           data: left_to_pay_highest,
           label: "Left To Pay",
-          borderColor: border_color,
+          borderColor: light_blue,
           fill: false
         }
         ]
@@ -325,12 +329,12 @@ $("#calculate")[0].addEventListener('click', function () {
         datasets: [{
           data: paid_so_far_weighted,
           label: "Total Paid",
-          borderColor: background_color,
+          borderColor: light_yellow,
           fill: true
         }, {
           data: left_to_pay_weighted,
           label: "Left To Pay",
-          borderColor: border_color,
+          borderColor: light_blue,
           fill: false
         }
         ]
