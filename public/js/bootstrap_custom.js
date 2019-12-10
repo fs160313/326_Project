@@ -156,6 +156,39 @@ $("#calculate")[0].addEventListener('click', function () {
     var border_color = ['rgba(75, 192, 192, 1)', 'rgba(192, 0, 0, 1)'];
     var background_color = ['rgba(75, 192, 192, 0.2)', 'rgba(192, 0, 0, 0.2)'];
 
+    // Bar Graph
+    var bar_data = {
+      labels: ['Consolidated', 'Highest First', 'Weighted'],
+      datasets: [
+        {
+          label: 'Principal',
+          data: [data.principal, data.principal, data.principal],
+          backgroundColor: [background_color, background_color, background_color]
+        },
+        {
+          label: 'Interest',
+          data: [data.consolidated_total_interest, data.highest_first_total_interest, data.weighted_total_interest],
+          backgroundColor: [border_color, border_color, border_color]
+        }
+
+      ]
+    };
+    var stacked_bar = document.getElementById("stackedBarChart").getContext('2d');
+    var stackedBar = new Chart(stacked_bar, {
+      type: 'bar',
+      data: bar_data,
+      options: {
+        scales: {
+          xAxes: [{
+            stacked: true
+          }],
+          yAxes: [{
+            stacked: true
+          }]
+        }
+      }
+    });
+
     // Pie Charts
     var pie_labels = [
       "Principal",
@@ -224,35 +257,88 @@ $("#calculate")[0].addEventListener('click', function () {
         }
       }
     });
-    // Bar Graph
-    var bar_data = {
-      labels: ['Consolidated', 'Highest First', 'Weighted'],
-      datasets: [
-        {
-          label: 'Principal',
-          data: [data.principal, data.principal, data.principal],
-          backgroundColor: [background_color, background_color, background_color]
-        },
-        {
-          labels: 'Interest',
-          data: [data.consolidated_total_interest, data.highest_first_total_interest, data.weighted_total_interest],
-          backgroundColor: [border_color, border_color, border_color]
+    // Line Charts
+    // // Consolidated
+    var months = data.line_chart.months;
+    var paid_so_far_consolidated = data.line_chart.line_chart_consolidated_spent;
+    var left_to_pay_consolidated = data.line_chart.line_chart_consolidated_left;
+    new Chart(document.getElementById("lineChartConsolidated"), {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          data: paid_so_far_consolidated,
+          label: "Total Paid",
+          borderColor: background_color,
+          fill: true
+        }, {
+          data: left_to_pay_consolidated,
+          label: "Left To Pay",
+          borderColor: border_color,
+          fill: false
         }
-
-      ]
-    };
-    var stacked_bar = document.getElementById("stackedBarChart").getContext('2d');
-    var stackedBar = new Chart(stacked_bar, {
-      type: 'bar',
-      data: bar_data,
+        ]
+      },
       options: {
-        scales: {
-          xAxes: [{
-            stacked: true
-          }],
-          yAxes: [{
-            stacked: true
-          }]
+        title: {
+          display: false,
+          text: 'Money Over Time'
+        }
+      }
+    });
+    // // Highest First
+    var months = data.line_chart.months;
+    var paid_so_far_highest = data.line_chart.line_chart_highest_spent;
+    var left_to_pay_highest = data.line_chart.line_chart_highest_left;
+    new Chart(document.getElementById("lineChartHighest"), {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          data: paid_so_far_highest,
+          label: "Total Paid",
+          borderColor: background_color,
+          fill: true
+        }, {
+          data: left_to_pay_highest,
+          label: "Left To Pay",
+          borderColor: border_color,
+          fill: false
+        }
+        ]
+      },
+      options: {
+        title: {
+          display: false,
+          text: 'Money Over Time'
+        }
+      }
+    });
+    // // Weighted 
+    var months = data.line_chart.months;
+    var paid_so_far_weighted = data.line_chart.line_chart_weighted_spent;
+    var left_to_pay_weighted = data.line_chart.line_chart_weighted_left;
+    new Chart(document.getElementById("lineChartWeighted"), {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [{
+          data: paid_so_far_weighted,
+          label: "Total Paid",
+          borderColor: background_color,
+          fill: true
+        }, {
+          data: left_to_pay_weighted,
+          label: "Left To Pay",
+          borderColor: border_color,
+          fill: false
+        }
+        ]
+      },
+      options: {
+        title: {
+          display: false,
+          text: 'Money Over Time'
         }
       }
     });
