@@ -123,7 +123,7 @@ $("#calculate")[0].addEventListener('click', function () {
         event.preventDefault();
         event.stopPropagation();
       }
-      if (data.consolidated_months == -1) {
+      else if (data.consolidated_months == -1) {
         window.alert("You\'ll never pay those off at that rate... Please enter a higher monthly payment.")
         event.preventDefault();
         event.stopPropagation();
