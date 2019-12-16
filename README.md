@@ -31,3 +31,6 @@ We are going to incorporate the following topics:
 * Backend calculations done in Python3
 
 * Data served on frontend with Chart.js
+
+
+Demo Video: https://drive.google.com/file/d/1yEQm8g-FxkXIvxSQqNMHVQ-ZImH9Od8r/view?usp=sharing
