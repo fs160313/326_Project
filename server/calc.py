@@ -41,9 +41,14 @@ class Calculator():
         total_paid = 0
         if self.dont_bother():
             return -1,-1,-1
+        self.PP.line_chart_consolidated_left += [total]
         while total > 0:    #until fully paid off
-            total-=self.PP.monthly_payment
-            total_paid += self.PP.monthly_payment if total > 0 else self.PP.monthly_payment + total
+            if self.PP.monthly_payment < total:
+                total-=self.PP.monthly_payment
+                total_paid += self.PP.monthly_payment
+            else:
+                total_paid += total
+                total = 0
             self.PP.line_chart_consolidated_left += [total]
             self.PP.line_chart_consolidated_spent += [total_paid]
             total = total*(1+self.PP.avg_interest/(100*365))**(365/12)
