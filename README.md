@@ -20,3 +20,14 @@ We are going to incorporate the following topics:
     We will store users' information in a database so it is available when they sign out and sign back in.
 * HTTP Application Server:  
     We will implement an HTTP server to communicate between the database and the client side application.
+    
+## What we used:
+* Server built with Node
+
+* Database built on Atlas MongoDB, communicates over Ajax
+
+* Frontend built with HTML5/CSS/JS using Bootstrap v4 and JQuery
+
+* Backend calculations done in Python3
+
+* Data served on frontend with Chart.js
