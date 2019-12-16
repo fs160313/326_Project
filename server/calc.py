@@ -31,12 +31,12 @@ class Calculator():
         total = self.PP.principal
         total_paid = 0
         while total > 0:    #until fully paid off
-            total = total*(1+self.PP.avg_interest/(100*365))**(365/12)
-            self.PP.line_chart_consolidated_left += [total]
-            num_months += 1
             total-=self.PP.monthly_payment
             total_paid += self.PP.monthly_payment if total > 0 else self.PP.monthly_payment + total
+            self.PP.line_chart_consolidated_left += [total]
             self.PP.line_chart_consolidated_spent += [total_paid]
+            total = total*(1+self.PP.avg_interest/(100*365))**(365/12)
+            num_months += 1
         return num_months, total_paid, total_paid - self.PP.principal
     def calc_months_highest_first(self):
         num_months = 0
