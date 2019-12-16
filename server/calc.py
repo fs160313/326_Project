@@ -26,21 +26,39 @@ class Calculator():
                     loan.left_to_pay = loan.left_to_pay*(1+loan.interest_rate/(100*365))**(365/12) #add daily interest for the month
             else:
                 loan.left_to_pay = loan.left_to_pay*(1+loan.interest_rate/(100*365))**(365/12) #add daily interest for the month
+    # if the payment is too low (and will get us stuck in a loop)
+    def dont_bother(self):
+        old_total = self.PP.principal
+        new_total = self.PP.principal*(1+self.PP.avg_interest/(100*365))**(365/12)
+        interest = new_total-old_total
+        if interest >= self.PP.monthly_payment:
+            return True
+        else: 
+            return False
     def calc_months_consolidated(self):
         num_months = 0
         total = self.PP.principal
         total_paid = 0
+        if self.dont_bother():
+            return -1,-1,-1
+        self.PP.line_chart_consolidated_left += [total]
         while total > 0:    #until fully paid off
-            total = total*(1+self.PP.avg_interest/(100*365))**(365/12)
+            if self.PP.monthly_payment < total:
+                total-=self.PP.monthly_payment
+                total_paid += self.PP.monthly_payment
+            else:
+                total_paid += total
+                total = 0
             self.PP.line_chart_consolidated_left += [total]
-            num_months += 1
-            total-=self.PP.monthly_payment
-            total_paid += self.PP.monthly_payment if total > 0 else self.PP.monthly_payment + total
             self.PP.line_chart_consolidated_spent += [total_paid]
+            total = total*(1+self.PP.avg_interest/(100*365))**(365/12)
+            num_months += 1
         return num_months, total_paid, total_paid - self.PP.principal
     def calc_months_highest_first(self):
         num_months = 0
         total_paid = 0
+        if self.dont_bother():
+            return -1,-1,-1
         for loan in self.PP.loans:
             loan.left_to_pay = loan.amount
         self.PP.line_chart_highest_left += [sum([loan.left_to_pay for loan in self.PP.loans])]
@@ -64,6 +82,8 @@ class Calculator():
     def calc_months_weighted(self):
         num_months = 0
         self.total_paid = 0
+        if self.dont_bother():
+            return -1,-1,-1
         for loan in self.PP.loans:
             loan.left_to_pay = loan.amount
         self.PP.line_chart_weighted_left += [sum([loan.left_to_pay for loan in self.PP.loans])]
