@@ -32,5 +32,8 @@ We are going to incorporate the following topics:
 
 * Data served on frontend with Chart.js
 
+## To Run:
+npm install
+npm start
 
 Demo Video: https://drive.google.com/file/d/1yEQm8g-FxkXIvxSQqNMHVQ-ZImH9Od8r/view?usp=sharing
